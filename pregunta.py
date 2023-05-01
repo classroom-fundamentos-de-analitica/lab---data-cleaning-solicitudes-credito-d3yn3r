@@ -18,10 +18,10 @@ def clean_data():
     df.monto_del_credito = df.monto_del_credito.astype(float)
     df.monto_del_credito = df.monto_del_credito.astype(int)
     df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True)  
-
-    colString = df.select_dtypes(include=['object']).columns.tolist()
+    df.comuna_ciudadano = df.comuna_ciudadano.apply(float)
+    #colString = df.select_dtypes(include=['object']).columns.tolist()
     
-    for i in colString:
+    for i in ['sexo', 'tipo_de_emprendimiento', 'idea_negocio', 'línea_credito', 'barrio']:
         df[i] = df[i].str.lower()
         df[i] = df[i].str.replace('_',' ')
         df[i] = df[i].str.replace('-',' ')
