@@ -16,17 +16,17 @@ def clean_data():
     df.monto_del_credito = df.monto_del_credito.str.strip('$')
     df.monto_del_credito = df.monto_del_credito.astype(float)
     df.monto_del_credito = df.monto_del_credito.astype(int)
-
+    df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True)
     df.dropna(axis=0, inplace=True)
 
-    df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True)  
+      
 
     colString = df.select_dtypes(include=['object']).columns.tolist()
     
     for i in colString:
         df[i] = df[i].str.lower()
-        df[i] = df[i].replace('-',' ')
-        df[i] = df[i].replace('_',' ')
+        df[i] = df[i].str.replace('-',' ')
+        df[i] = df[i].str.replace('_',' ')
     
     df.drop_duplicates(inplace=True)
 
